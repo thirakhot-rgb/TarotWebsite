@@ -76,7 +76,7 @@ curl -X DELETE http://localhost:3000/api/readings/1
 - เรียกเฉพาะ API ของตัวเอง ไม่ดึงข้อมูลจาก API ภายนอก
 
 ## Screenshots
-> ใส่ภาพไว้ในโฟลเดอร์ `docs/` แล้วแก้ชื่อไฟล์ด้านล่างให้ตรง
+
 
 ![หน้าแรก](docs/01-home.png)
 ![กำลังสับไพ่](docs/02-shuffle.png)
