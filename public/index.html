@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ไพ่ทาโรต์ประจำวันเกิด</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600&family=Sarabun:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="stars" aria-hidden="true"></div>
+  <nav class="topbar">
+    <a href="#/" class="brand">TAROTDATE</a>
+    <a href="#/cards" class="navlink">ไพ่ทั้ง 78 ใบ</a>
+  </nav>
+
+  <main>
+    <!-- ===== หน้าแรก ===== -->
+    <section id="home" class="view">
+      <div class="hero">
+        <div class="hero-text">
+          <p class="eyebrow">GYPSY TAROT ORACLE</p>
+          <h1>ไพ่ทาโรต์</h1>
+          <p class="lead">เปิดสำรับไพ่ทาโรต์ 78 ใบ ด้วยชื่อและวันเกิดของคุณ ไพ่จะถูกสับตามจำนวนวันที่คุณเกิด แล้วเผยคำทำนาย อดีต · ปัจจุบัน · อนาคต</p>
+          <div class="fan" aria-hidden="true">
+            <img src="cards/major-18.jpg" alt=""><img src="cards/major-17.jpg" alt=""><img src="cards/major-19.jpg" alt=""><img src="cards/major-1.jpg" alt=""><img src="cards/major-21.jpg" alt="">
+          </div>
+        </div>
+
+        <form id="form" class="panel formcard" novalidate>
+          <h2>เริ่มการทำนาย</h2>
+          <p class="sub">ใส่ข้อมูลของคุณ แล้วไพ่จะสับตามวันเกิด</p>
+          <label>ชื่อของคุณ
+            <input id="name" maxlength="50" placeholder="เช่น สมชาย" required>
+          </label>
+          <label>วันเกิด
+            <input id="birthDate" type="date" required>
+          </label>
+          <div class="field">หมวดที่ต้องการดูดวง
+            <input type="hidden" id="category" value="general">
+            <div class="chips" id="chips">
+              <button type="button" class="chip on" data-v="general">✦ ภาพรวม</button>
+              <button type="button" class="chip" data-v="love">♥ ความรัก</button>
+              <button type="button" class="chip" data-v="career">⚑ การงาน</button>
+              <button type="button" class="chip" data-v="money">◈ การเงิน</button>
+            </div>
+          </div>
+          <button class="primary" id="drawBtn">สับไพ่และเปิดคำทำนาย</button>
+          <p id="error" class="error" role="alert"></p>
+          <a href="#/cards" class="linkbtn">เปิดดูความหมายไพ่ทั้ง 78 ใบ →</a>
+        </form>
+      </div>
+
+      <div class="panel story">
+        <h2>ประวัติความเป็นมาของไพ่ทาโรต์</h2>
+        <div class="timeline">
+          <div><small>ศตวรรษที่ 15</small><h3>จุดกำเนิดในอิตาลี</h3><p>ไพ่เริ่มต้นจากไพ่เล่นของราชสำนักอิตาลี เรียกว่า Tarocchi ก่อนแพร่หลายไปทั่วยุโรป</p></div>
+          <div><small>ค.ศ. 1781</small><h3>กำเนิดการทำนาย</h3><p>Antoine Court de Gébelin เสนอว่าไพ่ซ่อนปัญญาโบราณ ทำให้ไพ่เริ่มถูกใช้เป็นเครื่องมือทำนาย</p></div>
+          <div><small>ปลายศตวรรษที่ 19</small><h3>ระบบ 78 ใบ</h3><p>Golden Dawn จัดระบบเป็น Major Arcana 22 ใบ และ Minor Arcana 56 ใบ</p></div>
+          <div><small>ค.ศ. 1909</small><h3>Rider–Waite–Smith</h3><p>Arthur Waite และ Pamela Colman Smith สร้างสำรับที่มีภาพประกอบทุกใบ เป็นต้นแบบที่ใช้กันทั่วโลก</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== หน้าดูดวง ===== -->
+    <section id="play" class="view" hidden>
+      <a href="#/" class="back">← กลับหน้าแรก</a>
+      <section id="stage" class="stage" hidden aria-live="polite">
+        <div id="shuffleArea" class="shuffle-area">
+          <div class="deck" id="deck"><span></span><span></span><span></span><span></span></div>
+          <p id="shuffleText"></p>
+        </div>
+        <div id="pickArea" class="pick-area" hidden>
+          <p id="pickHint" class="pick-hint"></p>
+          <div class="gallery-wrap">
+            <div id="gallery" class="gallery" tabindex="0" aria-label="สำรับไพ่ ลากหรือใช้ลูกศรซ้ายขวาเพื่อเลื่อน แล้วคลิกเพื่อเลือกไพ่"></div>
+            <button type="button" class="nav prev" id="galleryPrev" aria-label="เลื่อนไปทางซ้าย">‹</button>
+            <button type="button" class="nav next" id="galleryNext" aria-label="เลื่อนไปทางขวา">›</button>
+          </div>
+          <div id="slots" class="slots"></div>
+          <button type="button" id="resetPicks" hidden>เลือกใหม่</button>
+        </div>
+        <h2 id="resultTitle" class="result-title" hidden></h2>
+        <div id="spread" class="spread"></div>
+        <div id="summary" class="summary" hidden></div>
+        <div class="endbtns"><a href="#/" class="btn">⌂ หน้าแรก</a><a href="#/cards" class="btn">ดูไพ่ทั้ง 78 ใบ</a></div>
+      </section>
+    </section>
+
+    <!-- ===== หน้าไพ่ทั้งหมด ===== -->
+    <section id="library" class="view" hidden>
+      <a href="#/" class="back">← กลับหน้าแรก</a>
+      <h1 class="page-title">สำรับไพ่ทั้ง 78 ใบ</h1>
+      <p class="eyebrow center">MAJOR ARCANA 22 · MINOR ARCANA 56</p>
+      <div class="chips center" id="suitChips"></div>
+      <input id="search" class="search" type="search" placeholder="ค้นหาชื่อไพ่ เช่น ดวงอาทิตย์, Sun, ความรัก">
+      <div id="cardGrid" class="card-grid"></div>
+    </section>
+
+    <section id="historySec" class="panel">
+      <div class="history-head">
+        <h2>ประวัติการดูดวง</h2>
+        <select id="filter" aria-label="กรองตามหมวด">
+          <option value="">ทุกหมวด</option><option value="general">ภาพรวม</option><option value="love">ความรัก</option><option value="career">การงาน</option><option value="money">การเงิน</option>
+        </select>
+      </div>
+      <ul id="history" class="history"></ul>
+    </section>
+    <p class="foot">เพื่อความบันเทิงและเป็นข้อคิดในการดำเนินชีวิต</p>
+  </main>
+
+  <div id="modal" class="modal" hidden role="dialog" aria-modal="true"></div>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

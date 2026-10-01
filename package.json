@@ -1,0 +1,14 @@
+{
+  "name": "tarot-reading-api",
+  "version": "1.0.0",
+  "description": "เว็บดูดวงไพ่ยิปซี - Full-stack mini project (Node.js + Express REST API)",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "node --watch server/server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "ogl": "^1.0.11"
+  }
+}
